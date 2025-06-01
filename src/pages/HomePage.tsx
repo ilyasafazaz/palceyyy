@@ -23,14 +23,17 @@ const HomePage: React.FC<HomePageProps> = ({ mode }) => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h2 className="text-2xl font-bold text-slate-800 mb-6">
-        {mode === 'place' ? 'Featured Places' : mode === 'activity' ? 'Featured Activities' : 'Events'}
-      </h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {mode === 'place' && (
-          // Places Grid
-          samplePlaces.map(place => (
+    <div className="container mx-auto px-4 py-8 space-y-12">
+      {/* Trending Places */}
+      <section>
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-2xl font-bold text-slate-800">Trending Places</h2>
+          <a href="#" className="text-blue-600 hover:text-blue-700 text-sm font-medium">
+            View all places →
+          </a>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {samplePlaces.slice(0, 3).map(place => (
             <div key={place.id} className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
               <div className="relative h-48">
                 <img 
@@ -46,11 +49,11 @@ const HomePage: React.FC<HomePageProps> = ({ mode }) => {
                 </div>
               </div>
               <div className="p-4">
-                <p className="text-slate-600 text-sm mb-3">
+                <p className="text-slate-600 text-sm mb-3 line-clamp-2">
                   {place.description}
                 </p>
-                <div className="flex flex-wrap gap-2 mb-3">
-                  {place.categories.map((category, index) => (
+                <div className="flex flex-wrap gap-2">
+                  {place.categories.slice(0, 3).map((category, index) => (
                     <span 
                       key={index}
                       className="text-xs px-2 py-1 rounded-full bg-blue-100 text-blue-800"
@@ -61,12 +64,20 @@ const HomePage: React.FC<HomePageProps> = ({ mode }) => {
                 </div>
               </div>
             </div>
-          ))
-        )}
+          ))}
+        </div>
+      </section>
 
-        {mode === 'activity' && (
-          // Activities Grid
-          sampleActivities.map(activity => (
+      {/* Trending Activities */}
+      <section>
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-2xl font-bold text-slate-800">Trending Activities</h2>
+          <a href="#" className="text-blue-600 hover:text-blue-700 text-sm font-medium">
+            View all activities →
+          </a>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {sampleActivities.slice(0, 3).map(activity => (
             <div key={activity.id} className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
               <div className="relative h-48">
                 <img 
@@ -83,11 +94,11 @@ const HomePage: React.FC<HomePageProps> = ({ mode }) => {
                 </div>
               </div>
               <div className="p-4">
-                <p className="text-slate-600 text-sm mb-3">
+                <p className="text-slate-600 text-sm mb-3 line-clamp-2">
                   {activity.description}
                 </p>
-                <div className="flex flex-wrap gap-2 mb-3">
-                  {activity.context.map((ctx, index) => (
+                <div className="flex flex-wrap gap-2 mb-2">
+                  {activity.context.slice(0, 3).map((ctx, index) => (
                     <span 
                       key={index}
                       className="text-xs px-2 py-1 rounded-full bg-teal-100 text-teal-800"
@@ -96,18 +107,27 @@ const HomePage: React.FC<HomePageProps> = ({ mode }) => {
                     </span>
                   ))}
                 </div>
-                <div className="text-sm text-slate-500">
-                  <p>Duration: {activity.duration?.min}-{activity.duration?.max} {activity.duration?.unit}</p>
-                  <p>Frequency: {activity.frequency}</p>
+                <div className="text-xs text-slate-500">
+                  {activity.duration && (
+                    <p>Duration: {activity.duration.min}-{activity.duration.max} {activity.duration.unit}</p>
+                  )}
                 </div>
               </div>
             </div>
-          ))
-        )}
+          ))}
+        </div>
+      </section>
 
-        {mode === 'event' && (
-          // Events Grid
-          sampleEvents.map(event => (
+      {/* Trending Events */}
+      <section>
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-2xl font-bold text-slate-800">Trending Events</h2>
+          <a href="#" className="text-blue-600 hover:text-blue-700 text-sm font-medium">
+            View all events →
+          </a>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {sampleEvents.slice(0, 3).map(event => (
             <div key={event.id} className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
               <div className="relative h-48">
                 <img 
@@ -130,11 +150,11 @@ const HomePage: React.FC<HomePageProps> = ({ mode }) => {
                 </div>
               </div>
               <div className="p-4">
-                <p className="text-slate-600 text-sm mb-3">
+                <p className="text-slate-600 text-sm mb-3 line-clamp-2">
                   {event.description}
                 </p>
-                <div className="flex flex-wrap gap-2 mb-3">
-                  {event.category.map((cat, index) => (
+                <div className="flex flex-wrap gap-2 mb-2">
+                  {event.category.slice(0, 3).map((cat, index) => (
                     <span 
                       key={index}
                       className="text-xs px-2 py-1 rounded-full bg-purple-100 text-purple-800"
@@ -143,16 +163,17 @@ const HomePage: React.FC<HomePageProps> = ({ mode }) => {
                     </span>
                   ))}
                 </div>
-                <div className="text-sm text-slate-500 space-y-1">
+                <div className="text-xs text-slate-500 space-y-1">
                   <p>Date: {formatDate(event.date)} at {event.time}</p>
-                  <p>Price: {formatCurrency(event.price?.amount || 0, event.price?.currency || 'USD')}</p>
-                  <p>Available Tickets: {event.capacity?.available} / {event.capacity?.total}</p>
+                  {event.price && (
+                    <p>Price: {formatCurrency(event.price.amount, event.price.currency)}</p>
+                  )}
                 </div>
               </div>
             </div>
-          ))
-        )}
-      </div>
+          ))}
+        </div>
+      </section>
     </div>
   );
 };
