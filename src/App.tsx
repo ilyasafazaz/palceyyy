@@ -8,7 +8,9 @@ import {
   Wrench, 
   Tag, 
   Store, 
-  Users 
+  Users,
+  Activity,
+  MapPin
 } from 'lucide-react';
 import Sidebar from './components/Sidebar';
 import PlacesSidebar from './components/PlacesSidebar';
@@ -76,7 +78,7 @@ function App() {
                   onClick={() => setIsSidebarOpen(true)}
                   className="p-2 rounded-md hover:bg-slate-50 transition-colors"
                 >
-                  <Search size={22} className="text-slate-700" />
+                  <Activity size={22} className="text-slate-700" />
                 </button>
               </div>
 
@@ -92,7 +94,7 @@ function App() {
                   onClick={() => setIsPlacesSidebarOpen(true)}
                   className="p-2 rounded-md hover:bg-slate-50 transition-colors"
                 >
-                  <Globe size={22} className="text-slate-700" />
+                  <MapPin size={22} className="text-slate-700" />
                 </button>
               </div>
             </div>
