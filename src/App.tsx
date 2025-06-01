@@ -131,11 +131,11 @@ function App() {
 
         {/* Search Area */}
         <div className="container mx-auto px-4 flex justify-center">
-          <div className="max-w-2xl w-full flex items-center gap-2 py-3">
+          <div className="max-w-4xl w-full flex items-center gap-2 py-3">
             <select
               value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value)}
-              className="w-32 px-2 py-1.5 bg-white border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-slate-700 text-sm"
+              className="w-40 px-2 py-1.5 bg-white border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-slate-700 text-sm"
             >
               {categories.map((category) => (
                 <option key={category.value} value={category.value}>
